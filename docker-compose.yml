@@ -32,7 +32,7 @@ services:
       - 15672:15672
       - 61613:61613
     volumes:
-      - ./enabled_plugins/enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - ./rabbitmq-configuration/enabled_plugins:/etc/rabbitmq/enabled_plugins
       - rabbitmq-data:/var/lib/rabbitmq
     restart: unless-stopped
 
@@ -40,7 +40,7 @@ services:
     container_name: keycloak
     image: activiti/activiti-keycloak
     volumes:
-      - ./activiti-realm.json/activiti-realm.json:/opt/jboss/keycloak/activiti-realm.json
+      - ./keycloak-configuration/activiti-realm.json:/opt/jboss/keycloak/activiti-realm.json
     restart: unless-stopped
     depends_on:
       - nginx
