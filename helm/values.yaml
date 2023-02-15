@@ -1,12 +1,12 @@
 global:
   gateway:
     host: host.docker.internal
-  messaging:
-    broker: kafka
   keycloak:
     host: host.docker.internal
     clientSecretName: activiti-keycloak-client
     useExistingClientSecret: true
+  messaging:
+    broker: kafka
 
 kafka:
   enabled: true
