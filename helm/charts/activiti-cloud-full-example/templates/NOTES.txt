@@ -1,0 +1,43 @@
+-              _   _       _ _   _    _____ _                 _
+     /\       | | (_)     (_) | (_)  / ____| |               | |
+    /  \   ___| |_ ___   ___| |_ _  | |    | | ___  _   _  __| |
+   / /\ \ / __| __| \ \ / / | __| | | |    | |/ _ \| | | |/ _` |
+  / ____ \ (__| |_| |\ V /| | |_| | | |____| | (_) | |_| | (_| |
+ /_/    \_\___|\__|_| \_/ |_|\__|_|  \_____|_|\___/ \__,_|\__,_|
+ Version: {{ .Chart.Version }}
+
+Thank you for installing {{ .Chart.Name }}-{{ .Chart.Version }}
+
+Your release is named {{ .Release.Name }}.
+
+To learn more about the release, try:
+
+  $ helm status {{ .Release.Name }}
+  $ helm get {{ .Release.Name }}
+
+Get the application URLs:
+
+Activiti Gateway         : {{ template "common.gateway-url" . }}
+Activiti Identity        : {{ template "common.keycloak-url" . }}
+{{- if index .Values "activiti-modeling-app" "enabled" }}
+Activiti Modeler         : {{ template "common.gateway-url" . }}{{ index .Values "activiti-modeling-app" "ingress" "path" }}
+{{- end -}}
+{{ if index .Values "runtime-bundle" "enabled" }}
+Activiti Runtime Bundle  : {{ template "common.gateway-url" . }}{{ index .Values "runtime-bundle" "ingress" "path" }}
+{{- end -}}
+{{ if index .Values "activiti-cloud-connector" "enabled" }}
+Activiti Cloud Connector : {{ template "common.gateway-url" . }}{{ index .Values "activiti-cloud-connector" "ingress" "path" }}
+{{- end -}}
+{{ if index .Values "activiti-cloud-query" "enabled" }}
+{{- $queryIngressPath := index .Values "activiti-cloud-query" "ingress" "path" }}
+{{- if eq $queryIngressPath "/" }}{{ $queryIngressPath = "" }}{{ end }}
+Activiti Query           : {{ template "common.gateway-url" . }}{{ $queryIngressPath }}/query
+Activiti Audit           : {{ template "common.gateway-url" . }}{{ $queryIngressPath }}/audit
+Notifications GraphiQL   : {{ template "common.gateway-url" . }}{{ $queryIngressPath }}/notifications/graphiql
+Notifications WebSockets : {{ template "common.gateway-url" . }}{{ $queryIngressPath }}/notifications/ws/graphql
+Notifications Graphql    : {{ template "common.gateway-url" . }}{{ $queryIngressPath }}/notifications/graphql
+{{- end }}
+
+To see deployment status, try:
+
+  $ kubectl get pods -n {{ .Release.Namespace }}
