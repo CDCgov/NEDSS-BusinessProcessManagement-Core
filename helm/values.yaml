@@ -12,3 +12,19 @@ kafka:
   enabled: true
 rabbitmq:
   enabled: false
+
+activiti-cloud-modeling:
+  enabled: false
+activiti-cloud-identity-adapter:
+  enabled: false
+
+activiti-modeling-app:
+  enabled: false
+
+application:
+  runtime-bundle:
+    enabled: true
+  activiti-cloud-query:
+    enabled: false
+  activiti-cloud-connector:
+    enabled: false
