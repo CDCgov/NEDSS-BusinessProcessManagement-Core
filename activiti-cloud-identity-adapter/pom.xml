@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.activiti.cloud</groupId>
@@ -89,6 +89,11 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <image>
+            <name>localhost:5000/nedss-businessprocessmanagement-core/${project.artifactId}:${project.version}</name>
+          </image>
+        </configuration>
         <executions>
           <execution>
             <goals>
@@ -96,6 +101,19 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>io.kokuwa.maven</groupId>
+        <artifactId>helm-maven-plugin</artifactId>
+        <version>6.6.0</version>
+        <configuration>
+          <chartDirectory>${project.basedir}</chartDirectory>
+          <chartVersion>${project.version}</chartVersion>
+          <!-- This is the related section to use local binary with auto-detection disabled. -->
+          <useLocalHelmBinary>true</useLocalHelmBinary>
+          <autoDetectLocalHelmBinary>false</autoDetectLocalHelmBinary>
+          <helmExecutableDirectory>/opt/homebrew/bin</helmExecutableDirectory>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
