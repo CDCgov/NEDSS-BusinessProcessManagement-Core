@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "activiti-cloud-connector.fullname" . }}
+  name: {{ include "activiti-cloud-identity-adapter.fullname" . }}
   labels:
-    {{- include "activiti-cloud-connector.labels" . | nindent 4 }}
+    {{- include "activiti-cloud-identity-adapter.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "activiti-cloud-connector.fullname" . }}
+    name: {{ include "activiti-cloud-identity-adapter.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:

@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "activiti-cloud-query.fullname" . }}
+  name: {{ include "activiti-cloud-connector.fullname" . }}
   labels:
-    {{- include "activiti-cloud-query.labels" . | nindent 4 }}
+    {{- include "activiti-cloud-connector.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "activiti-cloud-query.selectorLabels" . | nindent 4 }}
+    {{- include "activiti-cloud-connector.selectorLabels" . | nindent 4 }}
