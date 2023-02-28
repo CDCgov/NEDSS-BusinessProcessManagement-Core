@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "activiti-cloud-identity-adapter.name" -}}
+{{- define "activiti.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "activiti-cloud-identity-adapter.fullname" -}}
+{{- define "activiti.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "activiti-cloud-identity-adapter.chart" -}}
+{{- define "activiti.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "activiti-cloud-identity-adapter.labels" -}}
-helm.sh/chart: {{ include "activiti-cloud-identity-adapter.chart" . }}
-{{ include "activiti-cloud-identity-adapter.selectorLabels" . }}
+{{- define "activiti.labels" -}}
+helm.sh/chart: {{ include "activiti.chart" . }}
+{{ include "activiti.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "activiti-cloud-identity-adapter.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "activiti-cloud-identity-adapter.name" . }}
+{{- define "activiti.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "activiti.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "activiti-cloud-identity-adapter.serviceAccountName" -}}
+{{- define "activiti.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "activiti-cloud-identity-adapter.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "activiti.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
