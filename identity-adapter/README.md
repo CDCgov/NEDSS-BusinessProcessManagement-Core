@@ -1,4 +1,4 @@
-# activiti-cloud-identity-adapter
+# identity-adapter
 
 Activiti Cloud Identity Adapter Service
 

@@ -5,7 +5,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>liquibase</module>
-    <module>starter</module>
+    <module>core</module>
   </modules>
   <parent>
     <groupId>org.activiti.cloud</groupId>

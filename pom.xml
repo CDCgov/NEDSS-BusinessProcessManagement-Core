@@ -29,7 +29,7 @@
   <modules>
     <module>runtime-bundle</module>
     <module>query</module>
-    <module>cloud-connector</module>
+    <module>connector</module>
     <module>modeling/liquibase</module>
     <module>modeling</module>
     <module>identity-adapter</module>

@@ -361,13 +361,13 @@ activiti-cloud-identity:
           account:
             - manage-account
             - view-profile
-activiti-cloud-identity-adapter:
+identity-adapter:
   enabled: true
-  nameOverride: activiti-cloud-identity-adapter
+  nameOverride: identity-adapter
   service:
     name: identity-adapter
   image:
-    repository: activiti/activiti-cloud-identity-adapter
+    repository: activiti/identity-adapter
     tag: 7.9.0-alpha.14
     pullPolicy: Always
   liquibase:

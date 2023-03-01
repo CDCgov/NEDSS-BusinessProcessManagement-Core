@@ -19,7 +19,7 @@ Kubernetes: `>=1.15.0-0`
 | https://activiti.github.io/activiti-cloud-helm-charts | activiti-cloud-query(common) | 7.8.0-alpha.2 |
 | https://activiti.github.io/activiti-cloud-helm-charts | activiti-cloud-connector(common) | 7.8.0-alpha.2 |
 | https://activiti.github.io/activiti-cloud-helm-charts | activiti-cloud-modeling(common) | 7.8.0-alpha.2 |
-| https://activiti.github.io/activiti-cloud-helm-charts | activiti-cloud-identity-adapter(common) | 7.8.0-alpha.2 |
+| https://activiti.github.io/activiti-cloud-helm-charts | identity-adapter(common) | 7.8.0-alpha.2 |
 | https://codecentric.github.io/helm-charts | activiti-cloud-identity(keycloak) | 11.0.1 |
 | https://raw.githubusercontent.com/bitnami/charts/archive-full-index/bitnami/ | kafka | 12.x.x |
 | https://raw.githubusercontent.com/bitnami/charts/archive-full-index/bitnami/ | postgresql | 9.1.1 |
@@ -48,25 +48,25 @@ Kubernetes: `>=1.15.0-0`
 | activiti-cloud-connector.resources.requests.cpu | string | `"150m"` |  |
 | activiti-cloud-connector.resources.requests.memory | string | `"256Mi"` |  |
 | activiti-cloud-connector.service.name | string | `"example-cloud-connector"` |  |
-| activiti-cloud-identity-adapter.enabled | bool | `true` |  |
-| activiti-cloud-identity-adapter.extraEnv | string | `"- name: SERVER_SERVLET_CONTEXTPATH\n  value: \"{{ tpl .Values.ingress.path . }}\"\n- name: SERVER_USEFORWARDHEADERS\n  value: \"true\"\n- name: SERVER_TOMCAT_INTERNALPROXIES\n  value: \".*\""` |  |
-| activiti-cloud-identity-adapter.image.pullPolicy | string | `"Always"` |  |
-| activiti-cloud-identity-adapter.image.repository | string | `"activiti/activiti-cloud-identity-adapter"` |  |
-| activiti-cloud-identity-adapter.image.tag | string | `"7.9.0-alpha.14"` |  |
-| activiti-cloud-identity-adapter.ingress.annotations."kubernetes.io/ingress.class" | string | `"nginx"` |  |
-| activiti-cloud-identity-adapter.ingress.annotations."nginx.ingress.kubernetes.io/cors-allow-headers" | string | `"Authorization, Content-Type, Accept"` |  |
-| activiti-cloud-identity-adapter.ingress.annotations."nginx.ingress.kubernetes.io/enable-cors" | string | `"true"` |  |
-| activiti-cloud-identity-adapter.ingress.path | string | `"/identity-adapter-service"` |  |
-| activiti-cloud-identity-adapter.liquibase.enabled | bool | `false` |  |
-| activiti-cloud-identity-adapter.livenessProbe.path | string | `"{{ tpl .Values.ingress.path . | trimSuffix \"/\" }}/actuator/health/liveness"` |  |
-| activiti-cloud-identity-adapter.nameOverride | string | `"activiti-cloud-identity-adapter"` |  |
-| activiti-cloud-identity-adapter.postgresql.enabled | bool | `false` |  |
-| activiti-cloud-identity-adapter.readinessProbe.path | string | `"{{ tpl .Values.ingress.path . | trimSuffix \"/\" }}/actuator/health/readiness"` |  |
-| activiti-cloud-identity-adapter.resources.limits.cpu | string | `"1"` |  |
-| activiti-cloud-identity-adapter.resources.limits.memory | string | `"1024Mi"` |  |
-| activiti-cloud-identity-adapter.resources.requests.cpu | string | `"400m"` |  |
-| activiti-cloud-identity-adapter.resources.requests.memory | string | `"512Mi"` |  |
-| activiti-cloud-identity-adapter.service.name | string | `"identity-adapter"` |  |
+| identity-adapter.enabled | bool | `true` |  |
+| identity-adapter.extraEnv | string | `"- name: SERVER_SERVLET_CONTEXTPATH\n  value: \"{{ tpl .Values.ingress.path . }}\"\n- name: SERVER_USEFORWARDHEADERS\n  value: \"true\"\n- name: SERVER_TOMCAT_INTERNALPROXIES\n  value: \".*\""` |  |
+| identity-adapter.image.pullPolicy | string | `"Always"` |  |
+| identity-adapter.image.repository | string | `"activiti/identity-adapter"` |  |
+| identity-adapter.image.tag | string | `"7.9.0-alpha.14"` |  |
+| identity-adapter.ingress.annotations."kubernetes.io/ingress.class" | string | `"nginx"` |  |
+| identity-adapter.ingress.annotations."nginx.ingress.kubernetes.io/cors-allow-headers" | string | `"Authorization, Content-Type, Accept"` |  |
+| identity-adapter.ingress.annotations."nginx.ingress.kubernetes.io/enable-cors" | string | `"true"` |  |
+| identity-adapter.ingress.path | string | `"/identity-adapter-service"` |  |
+| identity-adapter.liquibase.enabled | bool | `false` |  |
+| identity-adapter.livenessProbe.path | string | `"{{ tpl .Values.ingress.path . | trimSuffix \"/\" }}/actuator/health/liveness"` |  |
+| identity-adapter.nameOverride | string | `"identity-adapter"` |  |
+| identity-adapter.postgresql.enabled | bool | `false` |  |
+| identity-adapter.readinessProbe.path | string | `"{{ tpl .Values.ingress.path . | trimSuffix \"/\" }}/actuator/health/readiness"` |  |
+| identity-adapter.resources.limits.cpu | string | `"1"` |  |
+| identity-adapter.resources.limits.memory | string | `"1024Mi"` |  |
+| identity-adapter.resources.requests.cpu | string | `"400m"` |  |
+| identity-adapter.resources.requests.memory | string | `"512Mi"` |  |
+| identity-adapter.service.name | string | `"identity-adapter"` |  |
 | activiti-cloud-identity.enabled | bool | `true` |  |
 | activiti-cloud-identity.extraEnv | string | `"- name: KEYCLOAK_USER\n  value: {{ .Values.username }}\n- name: KEYCLOAK_PASSWORD\n  value: {{ .Values.password }}\n- name: PROXY_ADDRESS_FORWARDING\n  value: \"true\"\n- name: KEYCLOAK_IMPORT\n  value: /realm/realm.json"` |  |
 | activiti-cloud-identity.extraVolumeMounts | string | `"- name: realm-secret\n  mountPath: \"/realm/\"\n  readOnly: true\n"` |  |

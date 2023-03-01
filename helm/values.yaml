@@ -15,7 +15,7 @@ rabbitmq:
 
 activiti-cloud-modeling:
   enabled: false
-activiti-cloud-identity-adapter:
+identity-adapter:
   enabled: false
 
 activiti-modeling-app:
