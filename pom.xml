@@ -28,13 +28,13 @@
   </licenses>
   <modules>
     <module>runtime-bundle</module>
-    <module>activiti-cloud-query</module>
+    <module>query</module>
     <module>cloud-connector</module>
-    <module>activiti-cloud-modeling/liquibase</module>
-    <module>activiti-cloud-modeling</module>
-    <module>activiti-cloud-identity-adapter</module>
-    <module>activiti-cloud-acceptance-scenarios</module>
-    <module>activiti-cloud-dependencies</module>
+    <module>modeling/liquibase</module>
+    <module>modeling</module>
+    <module>identity-adapter</module>
+    <module>acceptance-scenarios</module>
+    <module>cloud-dependencies</module>
   </modules>
   <scm>
     <url>http://github.com/${project.scm.organization}/${project.scm.repository}</url>
