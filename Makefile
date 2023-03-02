@@ -17,7 +17,7 @@ RUNTIME_BUNDLE_CORE_DIR := $(RUNTIME_BUNDLE_DIR)/core
 RUNTIME_BUNDLE_HELM_DIR := $(RUNTIME_BUNDLE_CORE_DIR)/src/main/helm
 RUNTIME_BUNDLE_HELM_CHARTS_DIR := $(RUNTIME_BUNDLE_HELM_DIR)/runtime-bundle/charts
 
-build: dockerize helm-package-all
+build-all: dockerize helm-package-all
 
 dockerize: docker-push-connector docker-push-identity-adapter docker-push-query
 
@@ -28,7 +28,7 @@ maven-clean:
 
 helm-package-all: helm-package-identity-adapter helm-package-query helm-package-connector helm-package-runtime-bundle
 
-helm-lint-all: helm-lint-identity-adapter helm-lint-query lint runtime-bundle
+helm-lint-all: helm-lint-identity-adapter helm-lint-query helm-lint-runtime-bundle
 
 maven-package-connector:
 	cd $(CONNECTOR_DIR) && \
@@ -90,7 +90,8 @@ helm-lint-query:
 	cd $(QUERY_HELM_CHARTS_DIR) && \
 	helm lint
 
-helm-lint-rutime-bundle:
+
+helm-lint-runtime-bundle:
 	cd $(RUNTIME_BUNDLE_HELM_CHARTS_DIR) && \
 	helm lint
 
