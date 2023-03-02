@@ -26,9 +26,9 @@ clean: maven-clean
 maven-clean:
 	mvn clean
 
-helm-package-all: package-identity-adapter package-query package-connector package-runtime-bundle
+helm-package-all: helm-package-identity-adapter helm-package-query helm-package-connector helm-package-runtime-bundle
 
-helm-lint-all: lint-identity-adapter lint-query lint runtime-bundle
+helm-lint-all: helm-lint-identity-adapter helm-lint-query lint runtime-bundle
 
 maven-package-connector:
 	cd $(CONNECTOR_DIR) && \
@@ -78,36 +78,36 @@ docker-push-runtime-bundle: docker-build-runtime-bundle
 	cd $(RUNTIME_BUNDLE_CORE_DIR) && \
 	mvn -Dmaven.test.skip=true docker:push
 
-lint-connector:
+helm-lint-connector:
 	cd $(CONNECTOR_HELM_CHARTS_DIR) && \
 	helm lint
 
-lint-identity-adapter:
+helm-lint-identity-adapter:
 	cd $(IDENTITY_ADAPTER_HELM_CHARTS_DIR) && \
 	helm lint
 
-lint-query:
+helm-lint-query:
 	cd $(QUERY_HELM_CHARTS_DIR) && \
 	helm lint
 
-lint-rutime-bundle:
+helm-lint-rutime-bundle:
 	cd $(RUNTIME_BUNDLE_HELM_CHARTS_DIR) && \
 	helm lint
 
 
-package-connector: lint-connector
+helm-package-connector: helm-lint-connector
 	cd $(CONNECTOR_HELM_DIR) && \
   helm package connector/charts
 
-package-identity-adapter: lint-identity-adapter
+helm-package-identity-adapter: helm-lint-identity-adapter
 	cd $(IDENTITY_ADAPTER_HELM_DIR) && \
 	helm package identity-adapter/charts
 
-package-query: lint-query
+helm-package-query: helm-lint-query
 	cd $(QUERY_HELM_DIR) && \
 	helm package query/charts
 
-package-runtime-bundle:
+helm-package-runtime-bundle:
 	cd $(RUNTIME_BUNDLE_HELM_DIR) && \
 	helm package runtime-bundle/charts
 
