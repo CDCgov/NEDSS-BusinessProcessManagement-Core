@@ -1,7 +1,0 @@
-github:
-  organisations:
-    - name: alfresco
-      repositories:
-        - name: alfresco-process
-          branch: develop
-          useSinglePullRequest: true
