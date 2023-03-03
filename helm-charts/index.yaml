@@ -1,1 +1,14 @@
-
+apiVersion: v1
+entries:
+  cloud-connector:
+  - apiVersion: v2
+    appVersion: 7.9.0-SNAPSHOT
+    created: "2023-03-03T14:12:56.5387-06:00"
+    description: A Helm chart for Kubernetes
+    digest: 1a79fce58fe2d4590890191e2a8e24b7982b5165f9ee0b5f5a3cb1bab1ed01b4
+    name: cloud-connector
+    type: application
+    urls:
+    - https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts/connector/cloud-connector-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-03-03T14:12:56.537741-06:00"
