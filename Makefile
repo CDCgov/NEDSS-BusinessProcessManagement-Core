@@ -2,6 +2,7 @@ CONNECTOR_DIR := connector
 CONNECTOR_CORE_DIR := $(CONNECTOR_DIR)/core
 CONNECTOR_HELM_DIR := $(CONNECTOR_CORE_DIR)/src/main/helm
 CONNECTOR_HELM_CHARTS_DIR := $(CONNECTOR_HELM_DIR)/connector/charts
+CONNECTOR_TARGET_HELM_DIR := $(CONNECTOR_CORE_DIR)/target/helm
 
 IDENTITY_ADAPTER_DIR := identity-adapter
 IDENTITY_ADAPTER_HELM_DIR := identity-adapter/src/main/helm
@@ -17,14 +18,34 @@ RUNTIME_BUNDLE_CORE_DIR := $(RUNTIME_BUNDLE_DIR)/core
 RUNTIME_BUNDLE_HELM_DIR := $(RUNTIME_BUNDLE_CORE_DIR)/src/main/helm
 RUNTIME_BUNDLE_HELM_CHARTS_DIR := $(RUNTIME_BUNDLE_HELM_DIR)/runtime-bundle/charts
 
+HELM_CHECKOUT_TARGET_DIR := ./target
+HELM_REPO_TARGET_DIR := ./target/NEDSS-BusinessProcessManagement-Core
+HELM_REPO_TARGET_HELM_CHARTS_DIR := $(HELM_REPO_TARGET_DIR)/helm-charts
+HELM_REPO_TARGET_INDEX_YAML_FILE = $(HELM_REPO_TARGET_HELM_CHARTS_DIR)/index.yaml
+
+push-all: docker-push-all helm-push-to-repo-all
+
 build-all: maven-package-all docker-build-all helm-package-all
 
-helm-push-to-repo-all: build-all helm-checkout-repo
-	mkdir build
+helm-push-to-repo-all: build-all git-pull-helm-repo
 
-helm-checkout-repo:
-	mkdir build
-	#cd build; git checkout
+helm-repo-index-merge-connector: helm-package-connector | git-pull-helm-repo
+	helm repo index $(CONNECTOR_TARGET_HELM_DIR) --merge $(HELM_REPO_TARGET_INDEX_YAML_FILE) --url https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts && \
+	cp $(CONNECTOR_TARGET_HELM_DIR)/index.yaml $(HELM_REPO_TARGET_INDEX_YAML_FILE)
+	cp $(CONNECTOR_TARGET_HELM_DIR)/*.tgz $(HELM_REPO_TARGET_HELM_CHARTS_DIR)
+	git commit -a -m "Adding helm package"
+	git push
+
+git-pull-helm-repo: | $(HELM_REPO_TARGET_DIR)
+	cd $(HELM_REPO_TARGET_DIR) && \
+	git pull origin gh-pages
+
+$(HELM_REPO_TARGET_DIR): | $(HELM_CHECKOUT_TARGET_DIR)
+	cd $(HELM_CHECKOUT_TARGET_DIR) && \
+	git clone --branch gh-pages git@github.com:CDCgov/NEDSS-BusinessProcessManagement-Core.git
+
+$(HELM_CHECKOUT_TARGET_DIR):
+	mkdir $(HELM_CHECKOUT_TARGET_DIR)
 
 docker-push-all: docker-push-connector docker-push-identity-adapter docker-push-query
 
@@ -110,19 +131,19 @@ helm-lint-runtime-bundle:
 
 helm-package-connector: helm-lint-connector
 	cd $(CONNECTOR_HELM_DIR) && \
-  helm package connector/charts --destination ../../../target
+  helm package connector/charts --destination ../../../target/helm
 
 helm-package-identity-adapter: helm-lint-identity-adapter
 	cd $(IDENTITY_ADAPTER_HELM_DIR) && \
-	helm package identity-adapter/charts --destination ../../../target
+	helm package identity-adapter/charts --destination ../../../target/helm
 
 helm-package-query: helm-lint-query
 	cd $(QUERY_HELM_DIR) && \
-	helm package query/charts --destination ../../../target
+	helm package query/charts --destination ../../../target/helm
 
 helm-package-runtime-bundle:
 	cd $(RUNTIME_BUNDLE_HELM_DIR) && \
-	helm package runtime-bundle/charts
+	helm package runtime-bundle/charts --destination ../../../target/helm
 
 
 
