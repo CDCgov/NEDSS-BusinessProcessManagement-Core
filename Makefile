@@ -33,7 +33,7 @@ helm-repo-index-merge-connector: git-pull-helm-repo helm-package-connector
 	helm repo index $(CONNECTOR_TARGET_HELM_DIR) --merge $(HELM_REPO_TARGET_INDEX_YAML_FILE) --url https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts
 	cp $(CONNECTOR_TARGET_HELM_DIR)/index.yaml $(HELM_REPO_TARGET_INDEX_YAML_FILE)
 	cp $(CONNECTOR_TARGET_HELM_DIR)/*.tgz $(HELM_REPO_TARGET_HELM_CHARTS_DIR) && \
- 	cd $(CONNECTOR_TARGET_HELM_DIR) && git commit -a -m "Adding helm package" && git push
+ 	cd $(HELM_REPO_TARGET_DIR) && git add . && git commit -a -m "Adding helm package" && git push
 
 git-pull-helm-repo: | $(HELM_REPO_TARGET_DIR)
 	cd $(HELM_REPO_TARGET_DIR) && \
