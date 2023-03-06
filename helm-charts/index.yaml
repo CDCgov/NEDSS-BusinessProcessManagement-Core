@@ -33,4 +33,15 @@ entries:
     urls:
     - https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts/identity-adapter-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-06T16:09:56.784064-06:00"
+  runtime-bundle:
+  - apiVersion: v2
+    appVersion: 7.9.0-SNAPSHOT
+    created: "2023-03-06T16:11:43.349592-06:00"
+    description: A Helm chart for Kubernetes
+    digest: 8e2728d8758f06538015ed13449bd092acb473a1cfbeda1aad67ffe9da0f54d3
+    name: runtime-bundle
+    type: application
+    urls:
+    - https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts/runtime-bundle-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-03-06T16:11:43.348966-06:00"
