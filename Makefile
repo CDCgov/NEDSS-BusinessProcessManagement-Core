@@ -17,11 +17,23 @@ RUNTIME_BUNDLE_CORE_DIR := $(RUNTIME_BUNDLE_DIR)/core
 RUNTIME_BUNDLE_HELM_DIR := $(RUNTIME_BUNDLE_CORE_DIR)/src/main/helm
 RUNTIME_BUNDLE_HELM_CHARTS_DIR := $(RUNTIME_BUNDLE_HELM_DIR)/runtime-bundle/charts
 
-build-all: dockerize helm-package-all
+build-all: maven-package-all docker-build-all helm-package-all
 
-dockerize: docker-push-connector docker-push-identity-adapter docker-push-query
+helm-push-to-repo-all: build-all helm-checkout-repo
+	mkdir build
+
+helm-checkout-repo:
+	mkdir build
+	#cd build; git checkout
+
+docker-push-all: docker-push-connector docker-push-identity-adapter docker-push-query
+
+docker-build-all: docker-build-connector docker-build-identity-adapter docker-build-query docker-build-runtime-bundle
 
 clean: maven-clean
+
+maven-package-all:
+	mvn -Dmaven.test.skip=true package
 
 maven-clean:
 	mvn clean
@@ -98,15 +110,15 @@ helm-lint-runtime-bundle:
 
 helm-package-connector: helm-lint-connector
 	cd $(CONNECTOR_HELM_DIR) && \
-  helm package connector/charts
+  helm package connector/charts --destination ../../../target
 
 helm-package-identity-adapter: helm-lint-identity-adapter
 	cd $(IDENTITY_ADAPTER_HELM_DIR) && \
-	helm package identity-adapter/charts
+	helm package identity-adapter/charts --destination ../../../target
 
 helm-package-query: helm-lint-query
 	cd $(QUERY_HELM_DIR) && \
-	helm package query/charts
+	helm package query/charts --destination ../../../target
 
 helm-package-runtime-bundle:
 	cd $(RUNTIME_BUNDLE_HELM_DIR) && \
