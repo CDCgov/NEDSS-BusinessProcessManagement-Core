@@ -14,12 +14,12 @@ entries:
   connector:
   - apiVersion: v2
     appVersion: 7.9.0-SNAPSHOT
-    created: "2023-03-06T14:15:28.79904-06:00"
+    created: "2023-03-06T14:30:04.871275-06:00"
     description: A Helm chart for Kubernetes
-    digest: 5a4699ef09a9041cc16c1a2534f3ede57177e060490feced0e535b34cbae9afc
+    digest: f9d1e2f7ac42ae2a76aa20c3f116b575ba41c49c51c892af72f7b3864e05eb95
     name: connector
     type: application
     urls:
     - https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts/connector-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-06T14:15:28.798228-06:00"
+generated: "2023-03-06T14:30:04.870465-06:00"
