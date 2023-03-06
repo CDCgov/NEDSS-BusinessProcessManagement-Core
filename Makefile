@@ -7,6 +7,7 @@ CONNECTOR_TARGET_HELM_DIR := $(CONNECTOR_CORE_DIR)/target/helm
 IDENTITY_ADAPTER_DIR := identity-adapter
 IDENTITY_ADAPTER_HELM_DIR := identity-adapter/src/main/helm
 IDENTITY_ADAPTER_HELM_CHARTS_DIR := $(IDENTITY_ADAPTER_HELM_DIR)/identity-adapter/charts
+IDENTITY_ADAPTER_TARGET_HELM_DIR := $(IDENTITY_ADAPTER_DIR)/target/helm
 
 QUERY_DIR := query
 QUERY_CORE_DIR := $(QUERY_DIR)/core
@@ -27,7 +28,13 @@ push-all: docker-push-all helm-push-to-repo-all
 
 build-all: maven-package-all docker-build-all helm-package-all
 
-helm-push-to-repo-all: build-all git-pull-helm-repo
+helm-push-to-repo-all: build-all git-pull-helm-repo helm-repo-index-merge-connector
+
+helm-repo-index-merge-identity-adapter: git-pull-helm-repo helm-package-identity-adapter
+	helm repo index $(IDENTITY_ADAPTER_TARGET_HELM_DIR) --merge $(HELM_REPO_TARGET_INDEX_YAML_FILE) --url https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts
+	cp $(IDENTITY_ADAPTER_TARGET_HELM_DIR)/index.yaml $(HELM_REPO_TARGET_INDEX_YAML_FILE)
+	cp $(IDENTITY_ADAPTER_TARGET_HELM_DIR)/*.tgz $(HELM_REPO_TARGET_HELM_CHARTS_DIR) && \
+ 	cd $(HELM_REPO_TARGET_DIR) && git add . && git commit -a -m "Adding helm package" && git push
 
 helm-repo-index-merge-connector: git-pull-helm-repo helm-package-connector
 	helm repo index $(CONNECTOR_TARGET_HELM_DIR) --merge $(HELM_REPO_TARGET_INDEX_YAML_FILE) --url https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts
@@ -110,11 +117,11 @@ docker-push-runtime-bundle: docker-build-runtime-bundle
 	cd $(RUNTIME_BUNDLE_CORE_DIR) && \
 	mvn -Dmaven.test.skip=true docker:push
 
-helm-lint-connector:
+helm-lint-connector: maven-package-connector
 	cd $(CONNECTOR_HELM_CHARTS_DIR) && \
 	helm lint
 
-helm-lint-identity-adapter:
+helm-lint-identity-adapter: maven-package-identity-adapter
 	cd $(IDENTITY_ADAPTER_HELM_CHARTS_DIR) && \
 	helm lint
 
@@ -130,11 +137,11 @@ helm-lint-runtime-bundle:
 
 helm-package-connector: helm-lint-connector
 	cd $(CONNECTOR_HELM_DIR) && \
-  helm package connector/charts --destination ../../../target/helm
+  helm package connector/charts --destination $(CONNECTOR_TARGET_HELM_DIR)
 
 helm-package-identity-adapter: helm-lint-identity-adapter
 	cd $(IDENTITY_ADAPTER_HELM_DIR) && \
-	helm package identity-adapter/charts --destination ../../../target/helm
+	helm package identity-adapter/charts --destination $(IDENTITY_ADAPTER_TARGET_HELM_DIR)
 
 helm-package-query: helm-lint-query
 	cd $(QUERY_HELM_DIR) && \
