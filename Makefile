@@ -1,3 +1,5 @@
+ROOT_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+
 CONNECTOR_DIR := connector
 CONNECTOR_CORE_DIR := $(CONNECTOR_DIR)/core
 CONNECTOR_HELM_DIR := $(CONNECTOR_CORE_DIR)/src/main/helm
@@ -18,17 +20,24 @@ RUNTIME_BUNDLE_DIR := runtime-bundle
 RUNTIME_BUNDLE_CORE_DIR := $(RUNTIME_BUNDLE_DIR)/core
 RUNTIME_BUNDLE_HELM_DIR := $(RUNTIME_BUNDLE_CORE_DIR)/src/main/helm
 RUNTIME_BUNDLE_HELM_CHARTS_DIR := $(RUNTIME_BUNDLE_HELM_DIR)/runtime-bundle/charts
+RUNTIME_BUNDLE_TARGET_HELM_DIR := $(RUNTIME_BUNDLE_CORE_DIR)/target/helm
 
-HELM_CHECKOUT_TARGET_DIR := ./target
-HELM_REPO_TARGET_DIR := ./target/NEDSS-BusinessProcessManagement-Core
+HELM_CHECKOUT_TARGET_DIR := $(ROOT_DIR)/target
+HELM_REPO_TARGET_DIR := $(ROOT_DIR)/target/NEDSS-BusinessProcessManagement-Core
 HELM_REPO_TARGET_HELM_CHARTS_DIR := $(HELM_REPO_TARGET_DIR)/helm-charts
 HELM_REPO_TARGET_INDEX_YAML_FILE = $(HELM_REPO_TARGET_HELM_CHARTS_DIR)/index.yaml
 
-push-all: docker-push-all helm-push-to-repo-all
+push-all: docker-push-all helm-repo-index-merge-all
 
 build-all: maven-package-all docker-build-all helm-package-all
 
-helm-push-to-repo-all: build-all git-pull-helm-repo helm-repo-index-merge-connector
+helm-repo-index-merge-all: helm-repo-index-merge-connector helm-repo-index-merge-identity-adapter helm-repo-index-merge-runtime-bundle
+
+helm-repo-index-merge-runtime-bundle: git-pull-helm-repo helm-package-runtime-bundle
+	helm repo index $(RUNTIME_BUNDLE_TARGET_HELM_DIR) --merge $(HELM_REPO_TARGET_INDEX_YAML_FILE) --url https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts
+	cp $(RUNTIME_BUNDLE_TARGET_HELM_DIR)/index.yaml $(HELM_REPO_TARGET_INDEX_YAML_FILE)
+	cp $(RUNTIME_BUNDLE_TARGET_HELM_DIR)/*.tgz $(HELM_REPO_TARGET_HELM_CHARTS_DIR) && \
+ 	cd $(HELM_REPO_TARGET_DIR) && git add . && git commit -a -m "Adding helm package" && git push
 
 helm-repo-index-merge-identity-adapter: git-pull-helm-repo helm-package-identity-adapter
 	helm repo index $(IDENTITY_ADAPTER_TARGET_HELM_DIR) --merge $(HELM_REPO_TARGET_INDEX_YAML_FILE) --url https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts
@@ -117,11 +126,11 @@ docker-push-runtime-bundle: docker-build-runtime-bundle
 	cd $(RUNTIME_BUNDLE_CORE_DIR) && \
 	mvn -Dmaven.test.skip=true docker:push
 
-helm-lint-connector: maven-package-connector
+helm-lint-connector:
 	cd $(CONNECTOR_HELM_CHARTS_DIR) && \
 	helm lint
 
-helm-lint-identity-adapter: maven-package-identity-adapter
+helm-lint-identity-adapter:
 	cd $(IDENTITY_ADAPTER_HELM_CHARTS_DIR) && \
 	helm lint
 
@@ -137,19 +146,19 @@ helm-lint-runtime-bundle:
 
 helm-package-connector: helm-lint-connector
 	cd $(CONNECTOR_HELM_DIR) && \
-  helm package connector/charts --destination $(CONNECTOR_TARGET_HELM_DIR)
+  helm package connector/charts --destination $(ROOT_DIR)/$(CONNECTOR_TARGET_HELM_DIR)
 
 helm-package-identity-adapter: helm-lint-identity-adapter
 	cd $(IDENTITY_ADAPTER_HELM_DIR) && \
-	helm package identity-adapter/charts --destination $(IDENTITY_ADAPTER_TARGET_HELM_DIR)
+	helm package identity-adapter/charts --destination $(ROOT_DIR)/$(IDENTITY_ADAPTER_TARGET_HELM_DIR)
 
 helm-package-query: helm-lint-query
 	cd $(QUERY_HELM_DIR) && \
 	helm package query/charts --destination ../../../target/helm
 
-helm-package-runtime-bundle:
+helm-package-runtime-bundle: helm-lint-runtime-bundle
 	cd $(RUNTIME_BUNDLE_HELM_DIR) && \
-	helm package runtime-bundle/charts --destination ../../../target/helm
+	helm package runtime-bundle/charts --destination $(ROOT_DIR)/$(RUNTIME_BUNDLE_TARGET_HELM_DIR)
 
 
 
