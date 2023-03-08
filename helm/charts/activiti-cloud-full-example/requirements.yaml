@@ -17,7 +17,6 @@ dependencies:
     repository: "https://raw.githubusercontent.com/bitnami/charts/archive-full-index/bitnami/"
     version: "9.1.1"
     condition: "application.postgresql.enabled,postgresql.enabled"
-    alias: "postgresql-headless"
   - name: "common"
     repository: "https://activiti.github.io/activiti-cloud-helm-charts"
     version: "7.8.0-alpha.2"
