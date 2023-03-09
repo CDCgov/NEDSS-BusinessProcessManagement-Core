@@ -1,0 +1,30 @@
+global:
+  gateway:
+    host: host.docker.internal
+  keycloak:
+    host: host.docker.internal
+    clientSecretName: activiti-keycloak-client
+    useExistingClientSecret: true
+  messaging:
+    broker: kafka
+
+kafka:
+  enabled: true
+rabbitmq:
+  enabled: false
+
+activiti-cloud-modeling:
+  enabled: false
+identity-adapter:
+  enabled: false
+
+activiti-modeling-app:
+  enabled: false
+
+application:
+  runtime-bundle:
+    enabled: true
+  activiti-cloud-query:
+    enabled: false
+  activiti-cloud-connector:
+    enabled: false
