@@ -9,8 +9,8 @@ dependencies:
   repository: https://raw.githubusercontent.com/bitnami/charts/archive-full-index/bitnami/
   version: 12.20.0
 - name: postgresql
-  repository: https://raw.githubusercontent.com/bitnami/charts/archive-full-index/bitnami/
-  version: 9.1.1
+  repository: https://charts.bitnami.com/bitnami
+  version: 12.2.2
 - name: connector
   repository: https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts
   version: 0.1.0
@@ -26,5 +26,5 @@ dependencies:
 - name: runtime-bundle
   repository: https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts
   version: 0.1.0
-digest: sha256:5d571e99fb46a0e040a7c1a90550a4493d1e9e0ed4da181d1198c4e699711623
-generated: "2023-03-08T16:16:56.440979-06:00"
+digest: sha256:a86ff73843de09f1fa85ae8d8aaee02debd48511120e1008b11c7c68243120d1
+generated: "2023-03-09T14:30:12.691219-06:00"
