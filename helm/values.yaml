@@ -9,10 +9,17 @@ global:
     broker: kafka
   postgresql:
     secretName: boogersnot
-    readinessProbeCommand: foobarsnick
+#    readinessProbeCommand: ["psql", "-w", "-U", "abcd", "-d", "my-db", "-c", "SELECT 1"]
+    readinessProbe:
+      exec:
+        command: [ "psql", "-w", "-U", "abcd", "-d", "my-db", "-c", "SELECT 1" ]
+      initialDelaySeconds: 15
     auth:
       username: admin
       password: YCKl4kX8x2
       erlangCookie: O9yBhb0WeQpEUWad9W4dC3x1QNGGOf9Q
       existingSecret: thisisasecret
       database: core-bpmn
+postgresql:
+
+    timeoutSeconds: 2
