@@ -22,6 +22,17 @@ entries:
     urls:
     - https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts/connector-0.1.0.tgz
     version: 0.1.0
+  connector-core:
+  - apiVersion: v2
+    appVersion: 7.9.0-SNAPSHOT
+    created: "2023-03-10T14:09:04.221535-06:00"
+    description: A Helm chart for Kubernetes
+    digest: c9d0f6a3bf41d34407e76f5174ee0bf02ba6f8f8a520536b9b32d1220894de4f
+    name: connector-core
+    type: application
+    urls:
+    - https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts/connector-core-0.1.0.tgz
+    version: 0.1.0
   identity-adapter:
   - apiVersion: v2
     appVersion: 7.9.0-SNAPSHOT
@@ -66,4 +77,4 @@ entries:
     urls:
     - https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts/runtime-bundle-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-10T13:49:48.652196-06:00"
+generated: "2023-03-10T14:09:04.218345-06:00"
