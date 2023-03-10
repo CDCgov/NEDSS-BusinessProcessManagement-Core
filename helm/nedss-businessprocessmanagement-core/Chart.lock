@@ -1,13 +1,10 @@
 dependencies:
 - name: keycloak
-  repository: https://codecentric.github.io/helm-charts
-  version: 11.0.1
-- name: rabbitmq
-  repository: https://raw.githubusercontent.com/bitnami/charts/archive-full-index/bitnami/
-  version: 7.8.0
+  repository: https://charts.bitnami.com/bitnami
+  version: 13.3.0
 - name: kafka
-  repository: https://raw.githubusercontent.com/bitnami/charts/archive-full-index/bitnami/
-  version: 12.20.0
+  repository: https://charts.bitnami.com/bitnami
+  version: 21.3.1
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
   version: 12.2.2
@@ -26,5 +23,5 @@ dependencies:
 - name: runtime-bundle
   repository: https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts
   version: 0.1.0
-digest: sha256:a86ff73843de09f1fa85ae8d8aaee02debd48511120e1008b11c7c68243120d1
-generated: "2023-03-09T14:30:12.691219-06:00"
+digest: sha256:0798c789412e7c27c3addd695be1760349fcc3f42f8b3af6b6ad74ad038fcf91
+generated: "2023-03-10T09:33:41.652036-06:00"
