@@ -8,7 +8,7 @@ dependencies:
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
   version: 12.2.2
-- name: connector
+- name: connector-core
   repository: https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts
   version: 0.1.0
 - name: identity-adapter
@@ -23,5 +23,5 @@ dependencies:
 - name: runtime-bundle
   repository: https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts
   version: 0.1.0
-digest: sha256:0798c789412e7c27c3addd695be1760349fcc3f42f8b3af6b6ad74ad038fcf91
-generated: "2023-03-10T09:33:41.652036-06:00"
+digest: sha256:8433d8b79af65ca0036390621901d3bcfe7d06efabcac1c94b5a6a67e8256210
+generated: "2023-03-10T14:13:06.386665-06:00"

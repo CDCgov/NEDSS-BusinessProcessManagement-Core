@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "cloud-connector.name" -}}
+{{- define "connector.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "cloud-connector.fullname" -}}
+{{- define "connector.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "cloud-connector.chart" -}}
+{{- define "connector.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "cloud-connector.labels" -}}
-helm.sh/chart: {{ include "cloud-connector.chart" . }}
-{{ include "cloud-connector.selectorLabels" . }}
+{{- define "connector.labels" -}}
+helm.sh/chart: {{ include "connector.chart" . }}
+{{ include "connector.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "cloud-connector.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "cloud-connector.name" . }}
+{{- define "connector.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "connector.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "cloud-connector.serviceAccountName" -}}
+{{- define "connector.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "cloud-connector.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "connector.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

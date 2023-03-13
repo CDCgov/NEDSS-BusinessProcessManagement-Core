@@ -33,7 +33,7 @@ dependencies:
   - name: "postgresql"
     repository: "https://charts.bitnami.com/bitnami"
     version: "12.2.2"
-  - name: "connector"
+  - name: "connector-core"
     repository: "https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts"
     version: "0.1.0"
   - name: "identity-adapter"

@@ -1,3 +1,3 @@
-# example-cloud-connector
+# example-connector
 
 Activiti Cloud Connector Example

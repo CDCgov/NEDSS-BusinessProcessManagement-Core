@@ -3,7 +3,7 @@ ROOT_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 CONNECTOR_DIR := connector
 CONNECTOR_CORE_DIR := $(CONNECTOR_DIR)/core
 CONNECTOR_HELM_DIR := $(CONNECTOR_CORE_DIR)/src/main/helm
-CONNECTOR_HELM_CHARTS_DIR := $(CONNECTOR_HELM_DIR)/connector/charts
+CONNECTOR_HELM_CHARTS_DIR := $(CONNECTOR_HELM_DIR)/connector-core/charts
 CONNECTOR_TARGET_HELM_DIR := $(CONNECTOR_CORE_DIR)/target/helm
 
 HELM_CHECKOUT_TARGET_DIR := $(ROOT_DIR)/target
@@ -136,7 +136,7 @@ helm-repo-index-merge-query: git-pull-helm-repo helm-package-query
 
 helm-package-connector: helm-lint-connector
 	cd $(CONNECTOR_HELM_DIR) && \
-  helm package connector/charts --destination $(ROOT_DIR)/$(CONNECTOR_TARGET_HELM_DIR)
+  helm package connector-core/charts --destination $(ROOT_DIR)/$(CONNECTOR_TARGET_HELM_DIR)
 
 helm-package-identity-adapter: helm-lint-identity-adapter
 	cd $(IDENTITY_ADAPTER_HELM_DIR) && \
