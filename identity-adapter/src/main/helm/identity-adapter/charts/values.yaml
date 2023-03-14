@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: localhost:5000/nedss-businessprocessmanagement-core/identity-adapter
+  repository: jbarrowsenquizit/identity-adapter
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "7.9.0-SNAPSHOT"

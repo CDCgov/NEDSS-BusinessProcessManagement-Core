@@ -91,7 +91,7 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
           <image>
-            <name>localhost:5000/nedss-businessprocessmanagement-core/${project.artifactId}:${project.version}</name>
+            <name>jbarrowsenquizit/${project.artifactId}:${project.version}</name>
           </image>
         </configuration>
         <executions>
@@ -114,13 +114,19 @@
           <images>
             <!-- A single's image configuration -->
             <image>
-              <name>localhost:5000/nedss-businessprocessmanagement-core/${project.artifactId}:%t</name>
+              <name>jbarrowsenquizit/${project.artifactId}:${project.version}</name>
               <build>
                 <dockerFile/>
               </build>
             </image>
 
           </images>
+          <authConfig>
+            <push>
+              <username>jbarrowsenquizit</username>
+              <password>nykga5-fExsoc-binhap</password>
+            </push>
+          </authConfig>
         </configuration>
 
         <!-- Connect start/stop to pre- and

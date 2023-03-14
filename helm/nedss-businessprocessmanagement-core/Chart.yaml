@@ -45,6 +45,6 @@ dependencies:
   - name: "query"
     repository: "https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts"
     version: "0.1.0"
-  - name: "runtime-bundle"
+  - name: "runtime-bundle-core"
     repository: "https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts"
     version: "0.1.0"
