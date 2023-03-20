@@ -1,27 +1,6 @@
 dependencies:
-- name: keycloak
-  repository: https://charts.bitnami.com/bitnami
-  version: 13.3.0
-- name: kafka
-  repository: https://charts.bitnami.com/bitnami
-  version: 21.3.1
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami
   version: 12.2.2
-- name: connector-core
-  repository: https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts
-  version: 0.1.0
-- name: identity-adapter
-  repository: https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts
-  version: 0.1.0
-- name: modeling
-  repository: https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts
-  version: 0.1.0
-- name: query
-  repository: https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts
-  version: 0.1.0
-- name: runtime-bundle-core
-  repository: https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts
-  version: 0.1.0
-digest: sha256:7346d7021ccef82f4abf08b560788b31e54f5f22f359833ded5ec433df7a82b0
-generated: "2023-03-13T15:36:19.766775-05:00"
+digest: sha256:b0da0e043b4798b7d6c80dca74e96af2693a344ad873341bbb13ce83671496d1
+generated: "2023-03-16T10:12:58.867759-05:00"

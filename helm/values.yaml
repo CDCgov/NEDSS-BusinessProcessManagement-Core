@@ -7,19 +7,17 @@ global:
     useExistingClientSecret: true
   messaging:
     broker: kafka
+
   postgresql:
-    secretName: boogersnot
+    secretName: Murder-Variety-Whoever-Connect-3
     readinessProbeCommand: ["psql", "-w", "-U", "abcd", "-d", "my-db", "-c", "SELECT 1"]
     auth:
-      username: admin
-      adminPassword: YCKl4kX8x2
-      postgresPassword: YCKl4kX8x2
-      password: YCKl4kX8x2
+      postgresPassword: About-Money-Roll-Blame-5
       erlangCookie: O9yBhb0WeQpEUWad9W4dC3x1QNGGOf9Q
-      existingSecret: thisisasecret
+#      existingSecret: glory-sick-page-bear-9-i
       database: core-bpmn
 postgresql:
   readinessProbeCommand: ["psql", "-w", "-U", "abcd", "-d", "my-db", "-c", "SELECT 1"]
 keycloak:
   auth:
-    adminPassword: YCKl4kX8x2
+    adminPassword: About-Money-Roll-Blame-5
