@@ -1,0 +1,19 @@
+version: '3'
+services:
+  database:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: activiti_db
+      POSTGRES_USER: runtime_bundle
+      POSTGRES_PASSWORD: runtime_bundle
+  runtime_bundle:
+    image: jbarrowsenquizit/runtime-bundle-core:7.9.0-SNAPSHOT
+    ports:
+      - "8080:8080"
+    environment:
+      POSTGRES_DB: activiti_db
+      POSTGRES_USER: runtime_bundle
+      POSTGRES_PASSWORD: runtime_bundle
+

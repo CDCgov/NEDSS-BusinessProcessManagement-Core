@@ -82,7 +82,7 @@ docker-push-query: docker-build-query
 
 docker-push-runtime-bundle: docker-build-runtime-bundle
 	cd $(RUNTIME_BUNDLE_CORE_DIR) && \
-	mvn -Dmaven.test.skip=true docker:push
+	docker push jbarrowsenquizit/runtime-bundle-core:7.9.0-SNAPSHOT
 
 docker-build-connector: maven-package-connector
 	cd $(CONNECTOR_CORE_DIR) && \
@@ -102,7 +102,7 @@ docker-build-query: maven-package-query
 
 docker-build-runtime-bundle: maven-package-runtime-bundle
 	cd $(RUNTIME_BUNDLE_CORE_DIR) && \
-	mvn -Dmaven.test.skip=true docker:build
+	docker build . -t jbarrowsenquizit/runtime-bundle-core:7.9.0-SNAPSHOT
 
 helm-repo-index-merge-connector: git-pull-helm-repo helm-package-connector
 	helm repo index $(CONNECTOR_TARGET_HELM_DIR) --merge $(HELM_REPO_TARGET_INDEX_YAML_FILE) --url https://cdcgov.github.io/NEDSS-BusinessProcessManagement-Core/helm-charts
