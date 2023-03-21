@@ -8,14 +8,4 @@ services:
       POSTGRES_DB: runtime_bundle
       POSTGRES_USER: runtime_bundle
       POSTGRES_PASSWORD: runtime_bundle
-  runtime_bundle:
-    image: jbarrowsenquizit/runtime-bundle-core:7.9.0-SNAPSHOT
-    ports:
-      - "8080:8080"
-    environment:
-      RUNTIME_BUNDLE_CORE_DB_HOST: database
-      RUNTIME_BUNDLE_CORE_DB_PORT: 5432
-      RUNTIME_BUNDLE_CORE_DB_NAME: runtime_bundle
-      RUNTIME_BUNDLE_CORE_DB_USERNAME: runtime_bundle
-      RUNTIME_BUNDLE_CORE_DB_PASSWORD: runtime_bundle
 
